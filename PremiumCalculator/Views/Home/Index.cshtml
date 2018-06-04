@@ -5,7 +5,7 @@
 
 <div class="jumbotron">
     <h2>Calculate Premium.</h2>
-    <p class="lead">Please enter your name & age and click submit to Calculate your Premium.</p>
+    <p class="lead">Please enter your name & age and click calculate premium to Calculate your Premium.</p>
 </div>
 
 @using (Html.BeginForm("CalculatePremium", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -29,7 +29,6 @@
     <div class="form-group">
         @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @*@Html.TextBoxFor(m => m.Gender, new { @class = "form-control" })*@
             @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
             @Html.DropDownListFor(model => model.Gender, new List<SelectListItem>
                 {
@@ -43,14 +42,6 @@
             <input type="submit" class="btn btn-primary btn-lg" value="Calculate Premium" />
         </div>
     </div>
-
-
-    if (Model != null && !string.IsNullOrEmpty(Model.Result))
-    {
-        <div class="col-md-offset-1 col-md-10">
-            <p><h4>@Model.Result</h4></p>
-        </div>
-    }
 }
 
 

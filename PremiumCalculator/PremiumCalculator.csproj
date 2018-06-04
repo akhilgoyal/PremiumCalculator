@@ -316,6 +316,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="Views\Home\CalculatedPrimium.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PremiumCalculator.Service\PremiumCalculator.Service.csproj">

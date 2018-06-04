@@ -27,10 +27,9 @@ namespace PremiumCalculator.Controllers
         [HttpPost]
         public ActionResult CalculatePremium(CustomerModel model)
         {
-            //string output = string.Empty;
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                try
                 {
                     int age = _ageCalculator.CalcAge(model.DateOfBirth);
                     int.TryParse(_config.MinAge, out int minAge);
@@ -39,22 +38,22 @@ namespace PremiumCalculator.Controllers
                     if (age >= minAge && age <= maxAge)
                     {
                         decimal premium = _premiumCalculator.CalculatePremium(age, model.Gender);
-                        //output = $"{model.Name}, your premium is {premium}";
                         model.Premium = premium;
-                        model.Result = $"{model.Name}, your premium is ${premium} AUD";
+                        ViewBag.Message = $"{model.Name}, your premium is {premium:C}";
                     }
                     else
                     {
-                        model.Result = $"Sorry {model.Name} we only offer our services to person aged b/w 18 and 65.";
+                        ViewBag.Message = $"Sorry {model.Name}, we only offer our services to person aged b/w 18 and 65.";
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                model.Result = $"{model.Name} at the moment, we can not calculate your premium, please try again later.";
-            }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = $"{model.Name} at the moment, we can not calculate your premium, please try again later.";
+                }
 
-            return View("~/Views/Home/Index.cshtml", model);
+                return View("CalculatedPrimium");
+            }
+            return View("Index", model);
         }
     }
 }
