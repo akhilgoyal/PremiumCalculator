@@ -13,6 +13,7 @@ namespace PremiumCalculator
     {
         protected void Application_Start()
         {
+            RegisterModules.Register();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
